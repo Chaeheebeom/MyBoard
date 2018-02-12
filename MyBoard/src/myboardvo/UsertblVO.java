@@ -2,7 +2,7 @@ package myboardvo;
 
 public class UsertblVO {
 
-	private String prcode;
+	private int prcode;
 	private String id;
 	private String name;
 	private String passwd;
@@ -12,7 +12,7 @@ public class UsertblVO {
 		super();
 	}
 	
-	public UsertblVO(String prcode, String id, String name, String passwd, String phonnum) {
+	public UsertblVO(int prcode, String id, String name, String passwd, String phonnum) {
 		super();
 		this.prcode = prcode;
 		this.id = id;
@@ -21,11 +21,11 @@ public class UsertblVO {
 		this.phonnum = phonnum;
 	}
 
-	public String getPrcode() {
+	public int getPrcode() {
 		return prcode;
 	}
 
-	public void setPrcode(String prcode) {
+	public void setPrcode(int prcode) {
 		this.prcode = prcode;
 	}
 

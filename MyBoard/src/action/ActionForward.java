@@ -2,8 +2,8 @@ package action;
 
 public class ActionForward {
 
-	String path;
-	boolean isDirect;
+	private String path;
+	private boolean isDirect;
 	
 	public ActionForward(String path, boolean isDirect) {
 		super();

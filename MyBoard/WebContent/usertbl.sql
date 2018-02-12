@@ -1,6 +1,6 @@
 create table userstbl(
 
-	prcode varchar(5) primary key not null,
+	prcode int primary key not null auto_increment,
 	id varchar(20) not null,
 	name varchar(20) not null,
 	passwd varchar(30) not null,
