@@ -2,6 +2,7 @@ package action;
 
 import loginaction.LoginAction;
 import loginaction.UserInsertAction;
+import loginaction.UserLogoutAction;
 import loginaction.getInfoAction;
 
 public class LoginActionFactory {
@@ -26,6 +27,9 @@ public class LoginActionFactory {
 			break;
 			case"/insert.login":
 				action=new UserInsertAction("index.jsp");
+			break;
+			case"/logout.login":
+				action=new UserLogoutAction("index.jsp");
 			break;
 		}
 	

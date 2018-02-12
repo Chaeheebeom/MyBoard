@@ -36,7 +36,8 @@ for(MyBoardVO vo:list){
 <tr>
 	<td><%=vo.getBoard_num() %></td>
 	<td>
-		<a href="../view.do">
+		<a href="hitupdate.do?num=<%=vo.getBoard_num()%>">
+		<!-- 조회수 갔다가 뷰로가기 -->
 		<%=vo.getBoard_subject()%>
 		</a>
 	</td>
@@ -62,7 +63,7 @@ for(MyBoardVO vo:list){
  		<input type="submit" value="검색">
  	</td>
  	<td>
- 		<a href="view/qna_board_write.jsp">[글쓰기]</a>
+ 		<a href="writerview.do">[글쓰기]</a>
  	</td>
 </tr>
 </table>

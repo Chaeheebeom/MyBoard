@@ -32,9 +32,6 @@
 <tr>
 	<th>내용</th>
 	<td><textarea name="content" cols="60" rows="20" required></textarea></td><!-- cols는 가로길이 rows는 세로길이 -->
-</tr>
-<tr>
-	<th>비밀번호</th>
 	<td><input type="hidden" name="passwd" value="<%=vo.getPasswd()%>"></td>
 	<td><input type="hidden" name="prcode" value="<%=vo.getPrcode()%>"></td>
 	<td><input type="hidden" name="name" value="<%=vo.getName()%>"></td>

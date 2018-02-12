@@ -1,8 +1,10 @@
-<%@page import="board.vo.BoardVO"%>
+<%@page import="myboardvo.UsertblVO"%>
+<%@page import="myboardvo.MyBoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	
+	MyBoardVO vo=(MyBoardVO)request.getAttribute("vo");
+	UsertblVO vo2=(UsertblVO)session.getAttribute("Info");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,10 +16,10 @@
 		
 	}
 	function list_submit() {
-		
+		location.href="list.do";
 	}
 	function delete_submit(){
-		
+		location.href="showdelete.do?num=<%=vo.getBoard_num()%>";
 	}
 </script>
 </head>
@@ -26,15 +28,15 @@
 <table>  <!--  td는 기본 th는 재목 -->
 <tr>  
 	<th>글쓴이</th>
-	<td><input type="text" value="" readonly></td>
+	<td><input type="text" value="<%=vo.getUser_id() %>" readonly></td>
 </tr>
 <tr>
 	<th>제목</th>
-	<td><input type="text" value="" size="50" readonly></td> <!-- size는 길이 -->
+	<td><input type="text" value="<%=vo.getBoard_subject() %>" size="50" readonly></td> <!-- size는 길이 -->
 </tr>
 <tr>
 	<th>내용</th>
-	<td><textarea name="content" cols="60" rows="20" readonly></textarea></td><!-- cols는 가로길이 rows는 세로길이 -->
+	<td><textarea name="content" cols="60" rows="20" readonly><%=vo.getBoard_content()%></textarea></td><!-- cols는 가로길이 rows는 세로길이 -->
 </tr>
 <tr>
 	<th>파일첨부</th>
@@ -48,13 +50,16 @@
 </tr>
 <tr>
 	<th colspan="2" >
-		<a href="qReplyView.do"><input type="button" value="답변"></a>
-		<input type="button" value="수정" onclick="modify_list()">
-		<input type="button" value="삭제" onclick="delete_submit()">
-		<input type="button" value="목록보기" onclick="list_submit()">
+			
+			<a href="qReplyView.do"><input type="button" value="답변"></a>
+			<input type="button" value="수정" onclick="modify_list()">
+			<input type="button" value="삭제" onclick="delete_submit()">
+			<input type="button" value="목록보기" onclick="list_submit()">
+			
 	</th>
 </tr>
 </table>
 </form>
+<%response.sendRedirect("view/mainBoard.jsp?code=view?num="+vo.getBoard_num()); %>
 </body>
 </html>

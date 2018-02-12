@@ -18,10 +18,12 @@
 			case"회원가입실패":	%>		
 				alert('알수없는 오류 : 회원가입 실패');
 			<%break;
-			case"":
-			
-			break;
-			}%>
+			case"읽기실패":%>
+				alert('알수없는 오류 : 조회실패');
+			<%break;
+			case"삭제실패":%>
+				alert('비밀번호를 확인해주세요');
+			<%}%>
 		
 		history.back();
 	</script>

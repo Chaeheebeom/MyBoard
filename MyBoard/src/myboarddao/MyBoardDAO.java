@@ -57,7 +57,7 @@ public class MyBoardDAO {
 		Vector<MyBoardVO> vec=new Vector<>();
 		try {
 			con=getConnection();
-			String sql="select * from myboard";
+			String sql="select * from myboard order by board_re_ref desc, board_rs_seq asc";
 			pstmt=con.prepareStatement(sql);
 			rs=pstmt.executeQuery();
 			
@@ -87,6 +87,41 @@ public class MyBoardDAO {
 			close(rs, pstmt, con);
 		}return vec;
 	}
+	//번호에 맞는거 전부다 가져오가
+		public MyBoardVO getView(int num){
+			MyBoardVO vo=null;
+			try {
+				con=getConnection();
+				String sql="select * from myboard where board_num=? order by board_re_ref desc, board_rs_seq asc";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, num);
+				rs=pstmt.executeQuery();
+				
+				if(rs.next()) {
+				int user_prcode=rs.getInt(1);
+				String user_id=rs.getString(2);
+				int board_num=rs.getInt(3); 
+				String user_name=rs.getString(4); 
+				String board_pass=rs.getString(5); 
+				String board_subject=rs.getString(6); 
+				String board_content=rs.getString(7); 
+				String board_ori_file=rs.getString(8);
+				String board_re_file=rs.getString(9);
+				int board_re_ref=rs.getInt(10);
+				int board_re_lev=rs.getInt(11); 
+				int board_rs_seq=rs.getInt(12); 
+				int board_readcount=rs.getInt(13); 
+				Date board_date=rs.getDate(14);
+				vo=new MyBoardVO(user_prcode, user_id, board_num, user_name, 
+						board_pass, board_subject, board_content, board_ori_file, board_re_file, 
+						board_re_ref, board_re_lev, board_rs_seq, board_readcount, board_date);
+				}
+			}catch(Exception e) {
+				e.printStackTrace();
+			}finally {
+				close(rs, pstmt, con);
+			}return vo;
+		}
 	//삽입
 		public int insertArticle(MyBoardVO vo) {
 			int num;
@@ -136,5 +171,50 @@ public class MyBoardDAO {
 				close(pstmt, con);
 			}return result;
 		}
-	
+		//조회수 증가
+		public int addCount(int board_num) {
+			try {
+				con=getConnection();
+				con.setAutoCommit(false);
+				String sql="update myboard set board_readcount=board_readcount+1 where board_num=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, board_num);
+				result=pstmt.executeUpdate();
+				if(result>0)
+					con.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+				try {
+					con.rollback();
+				}catch(Exception e2) {
+					e2.printStackTrace();
+				}
+			}finally {
+				close(rs, pstmt, con);
+			}return result;
+		}
+		//삭제  
+		public int delete(int board_num) {
+			try {
+				con=getConnection();
+				con.setAutoCommit(false);
+				String sql="delete from myboard where board_num=?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, board_num);
+				result=pstmt.executeUpdate();
+				if(result>0)
+					con.commit();
+			}catch(Exception e) {
+				e.printStackTrace();
+				try {
+				con.rollback();
+				}catch(Exception e2) {
+					e2.printStackTrace();
+				}
+			}finally {
+				close(pstmt, con);
+			}
+			return result;
+		}
+		
 }
