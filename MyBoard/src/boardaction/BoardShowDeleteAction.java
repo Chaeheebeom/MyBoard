@@ -19,8 +19,8 @@ public class BoardShowDeleteAction implements Action {
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) {
 		String num=request.getParameter("num");
 		
-		
-		return null;
+		path+="?num="+num;
+		return new ActionForward(path, true);
 	}
 
 }

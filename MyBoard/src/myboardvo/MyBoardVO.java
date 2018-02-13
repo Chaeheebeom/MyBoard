@@ -40,6 +40,21 @@ public class MyBoardVO {
 		this.board_readcount = board_readcount;
 		this.board_date = board_date;
 	}
+	public MyBoardVO(int user_prcode, String user_id, int board_num, String user_name,String board_pass, 
+			String board_subject,String  board_content,int board_re_ref, 
+			int board_re_lev,int board_rs_seq) {
+		this.user_prcode = user_prcode;
+		this.user_id = user_id;
+		this.board_num = board_num;
+		this.user_name = user_name;
+		this.board_pass = board_pass;
+		this.board_subject = board_subject;
+		this.board_content = board_content;
+		this.board_re_ref = board_re_ref;
+		this.board_re_lev = board_re_lev;
+		this.board_rs_seq = board_rs_seq;		
+	}
+
 	public MyBoardVO() {
 		super();
 	}

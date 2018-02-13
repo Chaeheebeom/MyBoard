@@ -2,9 +2,11 @@
 <%@page import="myboardvo.MyBoardVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <jsp:include page="top.html"></jsp:include>
 <%
 	MyBoardVO vo=(MyBoardVO)request.getAttribute("vo");
 	UsertblVO vo2=(UsertblVO)session.getAttribute("Info");
+	String current_page=request.getParameter("page");
 %>
 <!DOCTYPE html>
 <html>
@@ -12,14 +14,17 @@
 <meta charset="UTF-8">
 <title></title>
 <script>
+	function reply_submit() {
+		location.href="replyview.do?num=<%=vo.getBoard_num()%>&page=<%=current_page%>"
+	}
 	function modify_list() {
-		
+		location.href="modifyview.do?num=<%=vo.getBoard_num()%>&page=<%=current_page%>";
 	}
 	function list_submit() {
-		location.href="list.do";
+		location.href="list.do?page=<%=current_page%>";
 	}
 	function delete_submit(){
-		location.href="showdelete.do?num=<%=vo.getBoard_num()%>";
+		location.href="showdelete.do?num=<%=vo.getBoard_num()%>&page=<%=current_page%>";
 	}
 </script>
 </head>
@@ -50,16 +55,16 @@
 </tr>
 <tr>
 	<th colspan="2" >
-			
-			<a href="qReplyView.do"><input type="button" value="답변"></a>
+			<input type="button" value="답변" onclick="reply_submit()">
+			<%if(vo.getUser_prcode()==vo2.getPrcode()){ %>
 			<input type="button" value="수정" onclick="modify_list()">
 			<input type="button" value="삭제" onclick="delete_submit()">
+			<%} %>
 			<input type="button" value="목록보기" onclick="list_submit()">
 			
 	</th>
 </tr>
 </table>
 </form>
-<%response.sendRedirect("view/mainBoard.jsp?code=view?num="+vo.getBoard_num()); %>
 </body>
 </html>

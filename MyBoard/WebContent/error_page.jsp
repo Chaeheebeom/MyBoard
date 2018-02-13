@@ -23,7 +23,14 @@
 			<%break;
 			case"삭제실패":%>
 				alert('비밀번호를 확인해주세요');
-			<%}%>
+			<%break;
+			case"수정실패":%>
+				aleet('알수없는 오류 : 수정실패');
+			<%break;
+			case"작성실패":%>
+				alert('작성실패');
+			<%break;
+		}%>
 		
 		history.back();
 	</script>

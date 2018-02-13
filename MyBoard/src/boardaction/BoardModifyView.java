@@ -2,35 +2,33 @@ package boardaction;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import action.Action;
 import action.ActionForward;
 import myboarddao.MyBoardDAO;
 import myboardvo.MyBoardVO;
-import myboardvo.UsertblVO;
 
-public class BoardViewAction implements Action {
-	private String path;
+
+public class BoardModifyView implements Action {
+
+	String path;
 	
-	public BoardViewAction(String path) {
-		super();
-		this.path = path;
+	public BoardModifyView(String path) {
+		this.path=path;
 	}
+	
 
 	@Override
 	public ActionForward excute(HttpServletRequest request, HttpServletResponse response) {
-		int num=Integer.parseInt(request.getParameter("num"));
-		String page=request.getParameter("page");
-		MyBoardDAO dao=new MyBoardDAO();
-		MyBoardVO vo=dao.getView(num);
+		int board_num=Integer.parseInt(request.getParameter("num"));
 		
-		if(vo!=null) {
-			request.setAttribute("vo", vo);
-			request.setAttribute("page", page);
-		}else {
-			path="error_page.jsp?code=읽기실패";
-		}
+		String page=request.getParameter("page");
+		
+		MyBoardDAO dao=new MyBoardDAO();
+		MyBoardVO vo=dao.getView(board_num);
+		
+		request.setAttribute("vo", vo);
+		request.setAttribute("page", page);
 		return new ActionForward(path, false);
 	}
 
